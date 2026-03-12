@@ -311,7 +311,7 @@
         .logo-section {
             position: absolute;
             top: 5%;
-            left: 2%; /* Сдвинул левее */
+            left: 2%;
             z-index: 10;
         }
 
@@ -521,22 +521,22 @@
             top: 3%;
             right: 5%;
             z-index: 20;
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             background: rgba(0,0,0,0.7);
             border: 2px solid var(--gold);
             border-radius: 50%;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
             cursor: pointer;
             backdrop-filter: blur(10px);
             box-shadow: 0 0 30px rgba(212,175,55,0.3);
         }
 
         .mobile-menu-toggle span {
-            width: 25px;
+            width: 22px;
             height: 2px;
             background: var(--gold);
             border-radius: 2px;
@@ -544,7 +544,7 @@
         }
 
         .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
+            transform: rotate(45deg) translate(5px, 5px);
         }
 
         .mobile-menu-toggle.active span:nth-child(2) {
@@ -553,7 +553,7 @@
         }
 
         .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
+            transform: rotate(-45deg) translate(5px, -5px);
         }
 
         .mobile-nav {
@@ -562,14 +562,14 @@
             top: 0;
             right: -100%;
             width: 80%;
-            max-width: 350px;
+            max-width: 300px;
             height: 100vh;
             background: rgba(0,0,0,0.95);
             backdrop-filter: blur(20px);
             z-index: 19;
-            padding: 100px 20px 30px;
+            padding: 80px 15px 20px;
             flex-direction: column;
-            gap: 15px;
+            gap: 10px;
             border-left: 2px solid var(--gold);
             transition: right 0.3s ease;
             overflow-y: auto;
@@ -579,12 +579,17 @@
             right: 0;
         }
 
+        /* Специальные стили для кнопок в мобильном меню */
         .mobile-nav .nav-btn {
             max-width: 100%;
-            padding: 15px 20px;
-            font-size: 0.9rem;
+            width: 100%;
+            padding: 12px 10px;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
             background: rgba(212,175,55,0.1);
             border-color: var(--gold);
+            margin: 0;
+            flex: none;
         }
 
         @media (max-width: 768px) {
@@ -598,6 +603,18 @@
             
             .mobile-nav {
                 display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .mobile-nav .nav-btn {
+                padding: 10px 8px;
+                font-size: 0.75rem;
+            }
+            
+            .mobile-nav {
+                padding: 70px 12px 15px;
+                max-width: 260px;
             }
         }
 
@@ -1127,49 +1144,6 @@
             .map-container {
                 height: 200px;
             }
-            
-            .mobile-nav .nav-btn {
-                padding: 12px 15px;
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo-wrapper {
-                width: 70px;
-                height: 70px;
-            }
-
-            .main-headline {
-                font-size: 2rem;
-            }
-
-            .main-headline span {
-                font-size: 0.8rem;
-            }
-
-            .welcome-text {
-                font-size: 0.9rem;
-            }
-
-            .cta-main {
-                padding: 12px 30px;
-                font-size: 0.8rem;
-            }
-            
-            .mobile-nav .nav-btn {
-                padding: 10px 12px;
-                font-size: 0.8rem;
-            }
-            
-            .mobile-menu-toggle {
-                width: 45px;
-                height: 45px;
-            }
-            
-            .mobile-menu-toggle span {
-                width: 22px;
-            }
         }
     </style>
 </head>
@@ -1504,7 +1478,8 @@
 
             // Закрываем меню при клике вне его
             document.addEventListener('click', function(e) {
-                if (!menuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
+                if (mobileNav && mobileNav.classList.contains('active') && 
+                    !menuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
                     menuToggle.classList.remove('active');
                     mobileNav.classList.remove('active');
                     document.body.style.overflow = '';
