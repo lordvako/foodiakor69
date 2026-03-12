@@ -128,6 +128,118 @@
             flex: 1;
         }
 
+        /* ===== ДЕКОРАТИВНЫЕ ПОЛОСЫ ДЛЯ ТЕЛЕФОНА ===== */
+        .mobile-frame {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 6;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-frame {
+                display: block;
+            }
+        }
+
+        .frame-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(180deg, 
+                rgba(0,0,0,0.8) 0%,
+                rgba(212,175,55,0.2) 50%,
+                transparent 100%);
+            z-index: 6;
+            pointer-events: none;
+        }
+
+        .frame-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(0deg, 
+                rgba(0,0,0,0.8) 0%,
+                rgba(212,175,55,0.2) 50%,
+                transparent 100%);
+            z-index: 6;
+            pointer-events: none;
+        }
+
+        .frame-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                rgba(0,0,0,0.6) 0%,
+                rgba(212,175,55,0.1) 50%,
+                transparent 100%);
+            z-index: 6;
+            pointer-events: none;
+        }
+
+        .frame-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 100%;
+            background: linear-gradient(270deg, 
+                rgba(0,0,0,0.6) 0%,
+                rgba(212,175,55,0.1) 50%,
+                transparent 100%);
+            z-index: 6;
+            pointer-events: none;
+        }
+
+        .frame-corner {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid rgba(212,175,55,0.3);
+            filter: drop-shadow(0 0 10px rgba(212,175,55,0.3));
+            z-index: 7;
+            pointer-events: none;
+        }
+
+        .frame-corner-tl {
+            top: 20px;
+            left: 20px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .frame-corner-tr {
+            top: 20px;
+            right: 20px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .frame-corner-bl {
+            bottom: 20px;
+            left: 20px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .frame-corner-br {
+            bottom: 20px;
+            right: 20px;
+            border-left: none;
+            border-top: none;
+        }
+
         .building-image {
             width: 100%;
             height: 100%;
@@ -138,7 +250,6 @@
             transition: transform 0.2s ease-out;
         }
 
-        /* На телефонах показываем всё здание */
         @media (max-width: 768px) {
             .building-image {
                 object-fit: contain;
@@ -150,7 +261,6 @@
             }
         }
 
-        /* Анимированные линии на фоне */
         .bg-lines {
             position: absolute;
             top: 0;
@@ -201,7 +311,7 @@
         .logo-section {
             position: absolute;
             top: 5%;
-            left: 5%;
+            left: 2%; /* Сдвинул левее */
             z-index: 10;
         }
 
@@ -411,30 +521,30 @@
             top: 3%;
             right: 5%;
             z-index: 20;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: rgba(0,0,0,0.7);
             border: 2px solid var(--gold);
             border-radius: 50%;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             cursor: pointer;
             backdrop-filter: blur(10px);
             box-shadow: 0 0 30px rgba(212,175,55,0.3);
         }
 
         .mobile-menu-toggle span {
-            width: 30px;
-            height: 3px;
+            width: 25px;
+            height: 2px;
             background: var(--gold);
-            border-radius: 3px;
+            border-radius: 2px;
             transition: all 0.3s ease;
         }
 
         .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
+            transform: rotate(45deg) translate(6px, 6px);
         }
 
         .mobile-menu-toggle.active span:nth-child(2) {
@@ -443,7 +553,7 @@
         }
 
         .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(8px, -8px);
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
         .mobile-nav {
@@ -452,14 +562,14 @@
             top: 0;
             right: -100%;
             width: 80%;
-            max-width: 400px;
+            max-width: 350px;
             height: 100vh;
             background: rgba(0,0,0,0.95);
             backdrop-filter: blur(20px);
             z-index: 19;
-            padding: 100px 30px 30px;
+            padding: 100px 20px 30px;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
             border-left: 2px solid var(--gold);
             transition: right 0.3s ease;
             overflow-y: auto;
@@ -471,8 +581,8 @@
 
         .mobile-nav .nav-btn {
             max-width: 100%;
-            padding: 20px;
-            font-size: 1.2rem;
+            padding: 15px 20px;
+            font-size: 0.9rem;
             background: rgba(212,175,55,0.1);
             border-color: var(--gold);
         }
@@ -884,7 +994,7 @@
         /* ===== ФУТЕР ===== */
         .footer {
             background: #000;
-            padding: 30px 20px;
+            padding: 20px;
             text-align: center;
             border-top: 1px solid rgba(212,175,55,0.3);
             position: relative;
@@ -893,18 +1003,19 @@
 
         .footer-text {
             font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            color: rgba(255,255,255,0.7);
-            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.05em;
         }
 
         .footer-link {
             color: var(--gold);
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.3s ease;
             position: relative;
             display: inline-block;
+            font-size: 0.8rem;
         }
 
         .footer-link::after {
@@ -924,16 +1035,6 @@
 
         .footer-link:hover::after {
             width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .footer {
-                padding: 20px 15px;
-            }
-            
-            .footer-text {
-                font-size: 0.85rem;
-            }
         }
 
         /* ===== АДАПТИВНОСТЬ ===== */
@@ -1026,6 +1127,11 @@
             .map-container {
                 height: 200px;
             }
+            
+            .mobile-nav .nav-btn {
+                padding: 12px 15px;
+                font-size: 0.85rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1050,6 +1156,20 @@
                 padding: 12px 30px;
                 font-size: 0.8rem;
             }
+            
+            .mobile-nav .nav-btn {
+                padding: 10px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .mobile-menu-toggle {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .mobile-menu-toggle span {
+                width: 22px;
+            }
         }
     </style>
 </head>
@@ -1068,6 +1188,18 @@
         </div>
 
         <img src="https://lh3.googleusercontent.com/d/1ZbJclKiq2jvvTQnIDTeoG7GF56o-m1O3" alt="Столовая ЯКОРЯ" class="building-image">
+        
+        <!-- Декоративные полосы для телефона -->
+        <div class="mobile-frame">
+            <div class="frame-top"></div>
+            <div class="frame-bottom"></div>
+            <div class="frame-left"></div>
+            <div class="frame-right"></div>
+            <div class="frame-corner frame-corner-tl"></div>
+            <div class="frame-corner frame-corner-tr"></div>
+            <div class="frame-corner frame-corner-bl"></div>
+            <div class="frame-corner frame-corner-br"></div>
+        </div>
         
         <div class="vignette"></div>
         <div class="gradient-overlay"></div>
@@ -1322,6 +1454,7 @@
                 if (mobileNav && mobileNav.classList.contains('active')) {
                     mobileNav.classList.remove('active');
                     menuToggle.classList.remove('active');
+                    document.body.style.overflow = '';
                 }
             });
         });
