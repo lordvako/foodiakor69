@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Столовая ЯКОРЯ</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
@@ -26,12 +26,20 @@
             height: 100%;
         }
 
-        /* Скрываем стандартный курсор ВЕЗДЕ */
-        * {
-            cursor: none !important;
+        /* ===== КУРСОР ===== */
+        /* На компьютере показываем кастомный курсор */
+        @media (hover: hover) and (pointer: fine) {
+            * {
+                cursor: none !important;
+            }
+            
+            .cursor-anchor, .cursor-ring {
+                display: block;
+            }
         }
 
-        @media (hover: none) {
+        /* На телефонах и планшетах курсор стандартный */
+        @media (hover: none) and (pointer: coarse) {
             * {
                 cursor: auto !important;
             }
@@ -40,7 +48,6 @@
             }
         }
 
-        /* Кастомный курсор — якорь */
         .cursor-anchor {
             width: 30px;
             height: 30px;
@@ -49,6 +56,14 @@
             z-index: 9999;
             opacity: 0;
             transition: opacity 0.3s;
+            left: 0;
+            top: 0;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .cursor-anchor {
+                opacity: 1;
+            }
         }
 
         .cursor-anchor::before {
@@ -57,6 +72,8 @@
             color: var(--gold);
             filter: drop-shadow(0 0 10px rgba(212,175,55,0.8));
             animation: anchorBob 2s ease-in-out infinite;
+            display: block;
+            line-height: 1;
         }
 
         @keyframes anchorBob {
@@ -74,6 +91,15 @@
             z-index: 9998;
             transition: all 0.15s ease-out;
             box-shadow: 0 0 20px rgba(212,175,55,0.3);
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .cursor-ring {
+                opacity: 1;
+            }
         }
 
         .cursor-ring::before {
@@ -90,12 +116,6 @@
             50% { transform: scale(1.2); opacity: 0; }
         }
 
-        @media (hover: hover) {
-            .cursor-anchor, .cursor-ring {
-                opacity: 1;
-            }
-        }
-
         .hero-container {
             position: relative;
             width: 100%;
@@ -108,15 +128,20 @@
             height: auto;
             min-height: 100vh;
             object-fit: cover;
-            object-position: center top;
+            object-position: center center;
             display: block;
             filter: brightness(1.05) contrast(1.05) saturate(1.1);
-            animation: imageBreath 10s ease-in-out infinite;
+            transition: transform 0.2s ease-out;
         }
 
-        @keyframes imageBreath {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+        @media (max-width: 768px) {
+            .building-image {
+                object-fit: cover;
+                object-position: 30% center;
+                min-height: 100vh;
+                width: 100%;
+                height: 100%;
+            }
         }
 
         /* Анимированные линии на фоне */
@@ -166,7 +191,7 @@
             z-index: 3;
         }
 
-        /* Логотип — только круглый */
+        /* ===== ЛОГОТИП ===== */
         .logo-section {
             position: absolute;
             top: 5%;
@@ -182,8 +207,40 @@
             padding: 5px;
             background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 50%, var(--gold) 100%);
             background-size: 200% 200%;
-            animation: gradientShift 3s ease infinite, logoFloat 4s ease-in-out infinite;
             box-shadow: 0 0 50px rgba(212,175,55,0.6), 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        /* Анимации только для компьютеров */
+        @media (hover: hover) and (pointer: fine) {
+            .logo-wrapper {
+                animation: gradientShift 3s ease infinite, logoFloat 4s ease-in-out infinite;
+            }
+            
+            .logo-glow {
+                animation: glowExpand 3s ease-in-out infinite;
+            }
+            
+            .logo-ring {
+                animation: ringSpin 10s linear infinite;
+            }
+            
+            .custom-logo {
+                animation: logoShine 4s ease-in-out infinite;
+            }
+        }
+
+        /* На телефонах логотип статичный, но всегда видимый */
+        @media (max-width: 768px) {
+            .logo-wrapper {
+                width: 100px;
+                height: 100px;
+                box-shadow: 0 0 30px rgba(212,175,55,0.5);
+            }
+            
+            .logo-section {
+                top: 3%;
+                left: 3%;
+            }
         }
 
         @keyframes gradientShift {
@@ -204,7 +261,6 @@
             border-radius: 50%;
             background: radial-gradient(circle, rgba(212,175,55,0.5) 0%, rgba(212,175,55,0.2) 30%, transparent 70%);
             z-index: -1;
-            animation: glowExpand 3s ease-in-out infinite;
         }
 
         @keyframes glowExpand {
@@ -217,7 +273,6 @@
             inset: -10px;
             border: 2px solid rgba(212,175,55,0.3);
             border-radius: 50%;
-            animation: ringSpin 10s linear infinite;
         }
 
         .logo-ring::before {
@@ -226,15 +281,10 @@
             inset: 5px;
             border: 1px solid rgba(212,175,55,0.2);
             border-radius: 50%;
-            animation: ringSpinReverse 15s linear infinite;
         }
 
         @keyframes ringSpin {
             to { transform: rotate(360deg); }
-        }
-
-        @keyframes ringSpinReverse {
-            to { transform: rotate(-360deg); }
         }
 
         .custom-logo {
@@ -245,7 +295,6 @@
             border: 4px solid #fff;
             background: #fff;
             display: block;
-            animation: logoShine 4s ease-in-out infinite;
         }
 
         @keyframes logoShine {
@@ -253,17 +302,17 @@
             50% { filter: brightness(1.1); }
         }
 
-        /* КНОПКИ — ВЫШЕ и РАСТЯНУТЫ ПО ВСЕЙ КРЫШЕ */
+        /* ===== КНОПКИ НАВИГАЦИИ ===== */
         .nav-container {
             position: absolute;
-            top: 3%; /* Подняли выше */
+            top: 3%;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%; /* Растянули почти на всю ширину */
-            max-width: 1400px; /* Максимальная ширина */
+            width: 90%;
+            max-width: 1400px;
             z-index: 15;
             display: flex;
-            justify-content: space-between; /* Равномерное распределение */
+            justify-content: space-between;
             gap: 20px;
             padding: 25px 50px;
             background: rgba(0,0,0,0.5);
@@ -275,7 +324,7 @@
 
         .nav-btn {
             position: relative;
-            flex: 1; /* Растягиваются равномерно */
+            flex: 1;
             max-width: 280px;
             padding: 20px 30px;
             background: rgba(0,0,0,0.4);
@@ -351,7 +400,6 @@
             100% { transform: translateX(100%) rotate(30deg); opacity: 0; }
         }
 
-        /* Эффект света в окне */
         .window-glow {
             position: absolute;
             top: 20%;
@@ -378,7 +426,7 @@
             75% { opacity: 0.9; }
         }
 
-        /* Плавающие частицы */
+        /* Частицы */
         .particles {
             position: absolute;
             top: 0;
@@ -742,7 +790,7 @@
             border: none;
         }
 
-        /* Адаптивность */
+        /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 1200px) {
             .nav-container {
                 padding: 20px 40px;
@@ -782,70 +830,18 @@
             .nav-container {
                 flex-wrap: wrap;
                 justify-content: center;
-                gap: 12px;
-                padding: 20px 25px;
+                gap: 10px;
+                padding: 15px 20px;
                 top: 2%;
                 border-radius: 30px;
                 width: 95%;
+                background: rgba(0,0,0,0.7);
             }
 
             .nav-btn {
-                flex: 1 1 40%;
+                flex: 1 1 calc(50% - 10px);
                 max-width: none;
-                padding: 16px 20px;
-                font-size: 0.85rem;
-            }
-
-            .logo-wrapper {
-                width: 100px;
-                height: 100px;
-            }
-
-            .main-headline {
-                font-size: 2.8rem;
-            }
-
-            .main-headline span {
-                font-size: 1rem;
-                letter-spacing: 0.3em;
-            }
-
-            .welcome-text {
-                font-size: 1.1rem;
-            }
-
-            .info-bar {
-                flex-direction: column;
-                gap: 20px;
-            }
-
-            .divider {
-                width: 60px;
-                height: 2px;
-            }
-
-            .modal-content {
-                padding: 30px;
-            }
-
-            .modal-title {
-                font-size: 2rem;
-            }
-
-            .map-container {
-                height: 250px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-container {
-                padding: 15px 20px;
-                gap: 10px;
-            }
-
-            .nav-btn {
-                flex: 1 1 45%;
-                padding: 14px 15px;
+                padding: 12px 15px;
                 font-size: 0.75rem;
                 letter-spacing: 0.1em;
             }
@@ -855,13 +851,93 @@
                 height: 80px;
             }
 
+            .building-image {
+                object-fit: cover;
+                object-position: 30% center;
+            }
+
             .main-headline {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
+            }
+
+            .main-headline span {
+                font-size: 0.9rem;
+                letter-spacing: 0.2em;
+            }
+
+            .welcome-text {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .info-bar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .divider {
+                width: 60px;
+                height: 2px;
+            }
+
+            .info-text {
+                font-size: 1rem;
             }
 
             .cta-main {
                 padding: 15px 40px;
                 font-size: 0.9rem;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+
+            .modal-title {
+                font-size: 2rem;
+            }
+
+            .modal-body {
+                font-size: 1rem;
+            }
+
+            .map-container {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 12px 15px;
+                gap: 8px;
+            }
+
+            .nav-btn {
+                flex: 1 1 100%;
+                padding: 10px 12px;
+                font-size: 0.7rem;
+            }
+
+            .logo-wrapper {
+                width: 70px;
+                height: 70px;
+            }
+
+            .main-headline {
+                font-size: 2rem;
+            }
+
+            .main-headline span {
+                font-size: 0.8rem;
+            }
+
+            .welcome-text {
+                font-size: 0.9rem;
+            }
+
+            .cta-main {
+                padding: 12px 30px;
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -890,7 +966,7 @@
         <!-- Частицы -->
         <div class="particles" id="particles"></div>
 
-        <!-- Логотип — только круглый -->
+        <!-- Логотип -->
         <div class="logo-section">
             <div class="logo-wrapper">
                 <div class="logo-glow"></div>
@@ -899,7 +975,7 @@
             </div>
         </div>
 
-        <!-- КНОПКИ — ВЫШЕ и РАСТЯНУТЫ ПО ВСЕЙ ШИРИНЕ -->
+        <!-- Кнопки навигации -->
         <div class="nav-container">
             <button class="nav-btn" data-modal="menu"><span>Меню</span><div class="shine"></div></button>
             <button class="nav-btn" data-modal="gallery"><span>Фотогалерея</span><div class="shine"></div></button>
@@ -1030,26 +1106,31 @@
     </div>
 
     <script>
-        // Кастомный курсор — якорь
+        // Кастомный курсор — только для компьютеров
         const cursorAnchor = document.querySelector('.cursor-anchor');
         const cursorRing = document.querySelector('.cursor-ring');
         
-        if (window.matchMedia('(hover: hover)').matches) {
+        // Проверяем, что это устройство с мышью
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             document.addEventListener('mousemove', (e) => {
-                cursorAnchor.style.left = (e.clientX - 15) + 'px';
-                cursorAnchor.style.top = (e.clientY - 15) + 'px';
-                
-                setTimeout(() => {
-                    cursorRing.style.left = (e.clientX - 25) + 'px';
-                    cursorRing.style.top = (e.clientY - 25) + 'px';
-                }, 80);
+                if (cursorAnchor && cursorRing) {
+                    cursorAnchor.style.left = (e.clientX - 15) + 'px';
+                    cursorAnchor.style.top = (e.clientY - 15) + 'px';
+                    
+                    setTimeout(() => {
+                        cursorRing.style.left = (e.clientX - 25) + 'px';
+                        cursorRing.style.top = (e.clientY - 25) + 'px';
+                    }, 80);
+                }
             });
         }
 
         // Создание частиц
         function createParticles() {
             const container = document.getElementById('particles');
-            const particleCount = 25;
+            if (!container) return;
+            
+            const particleCount = window.innerWidth < 768 ? 15 : 25;
             
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
@@ -1136,20 +1217,20 @@
         const aboutBtn = document.querySelector('[data-modal="about"]');
         const windowGlow = document.getElementById('windowGlow');
         
-        if (aboutBtn && windowGlow) {
+        if (aboutBtn && windowGlow && window.matchMedia('(hover: hover)').matches) {
             aboutBtn.addEventListener('mouseenter', () => {
                 windowGlow.style.opacity = '1';
             });
             
             aboutBtn.addEventListener('mouseleave', () => {
                 const aboutModal = document.getElementById('modal-about');
-                if (!aboutModal.classList.contains('active')) {
+                if (!aboutModal || !aboutModal.classList.contains('active')) {
                     windowGlow.style.opacity = '0';
                 }
             });
         }
 
-        // Параллакс для фона
+        // Параллакс для фона — только на компьютерах
         if (window.matchMedia('(hover: hover)').matches) {
             document.addEventListener('mousemove', (e) => {
                 const x = (e.clientX / window.innerWidth - 0.5) * 15;
@@ -1161,6 +1242,14 @@
                 }
             });
         }
+
+        // Корректировка фонового изображения при изменении размера окна
+        window.addEventListener('resize', function() {
+            const building = document.querySelector('.building-image');
+            if (building) {
+                building.style.transform = 'scale(1) translate(0, 0)';
+            }
+        });
     </script>
 
 </body>
