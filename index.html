@@ -1098,16 +1098,24 @@
 
             .main-headline {
                 font-size: 2.5rem;
+                margin-bottom: 15px;
+                padding-top: 40px; /* Опускаем текст ниже */
             }
 
             .main-headline span {
                 font-size: 0.9rem;
                 letter-spacing: 0.2em;
+                margin-top: 10px;
+            }
+
+            .grass-content {
+                padding: 80px 20px 40px; /* Увеличил верхний отступ */
             }
 
             .welcome-text {
                 font-size: 1rem;
                 line-height: 1.6;
+                margin-bottom: 25px;
             }
 
             .info-bar {
@@ -1143,6 +1151,39 @@
 
             .map-container {
                 height: 200px;
+            }
+            
+            .grass-inner {
+                margin-top: 20px; /* Добавил отступ */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-wrapper {
+                width: 70px;
+                height: 70px;
+            }
+
+            .main-headline {
+                font-size: 2rem;
+                padding-top: 50px; /* Ещё ниже на маленьких экранах */
+            }
+
+            .main-headline span {
+                font-size: 0.8rem;
+            }
+
+            .welcome-text {
+                font-size: 0.9rem;
+            }
+
+            .cta-main {
+                padding: 12px 30px;
+                font-size: 0.8rem;
+            }
+            
+            .grass-content {
+                padding: 90px 15px 30px; /* Ещё больше отступ */
             }
         }
     </style>
