@@ -992,7 +992,15 @@
             margin-bottom: 20px;
         }
 
-        /* Стили для меню */
+        /* Стили для меню (обновленные) */
+        .menu-container {
+            background: rgba(30,20,10,0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            margin-top: 10px;
+        }
+        
         .menu-table {
             width: 100%;
             border-collapse: collapse;
@@ -1006,13 +1014,14 @@
             font-weight: 600;
             padding: 12px 8px;
             text-align: left;
-            border-bottom: 2px solid rgba(212,175,55,0.3);
+            border-bottom: 2px solid rgba(212,175,55,0.5);
             letter-spacing: 0.1em;
         }
         
         .menu-table td {
             padding: 10px 8px;
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.95);
+            border-bottom: 1px solid rgba(212,175,55,0.2);
         }
         
         .menu-table tr.day-separator td {
@@ -1025,21 +1034,15 @@
         }
         
         .menu-table tr:hover td {
-            background: rgba(212,175,55,0.05);
-        }
-        
-        .menu-date {
-            font-weight: 600;
-            color: var(--gold);
-            white-space: nowrap;
+            background: rgba(212,175,55,0.1);
         }
         
         .menu-dish {
-            font-weight: 400;
+            font-weight: 500;
         }
         
         .menu-weight {
-            color: rgba(212,175,55,0.7);
+            color: var(--gold);
             font-size: 0.9rem;
             white-space: nowrap;
             text-align: right;
@@ -1048,9 +1051,9 @@
         .menu-note {
             margin-top: 25px;
             padding-top: 20px;
-            border-top: 1px solid rgba(212,175,55,0.2);
+            border-top: 1px solid rgba(212,175,55,0.3);
             text-align: center;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.8);
             font-style: italic;
             font-size: 0.9rem;
         }
@@ -1074,10 +1077,6 @@
             .menu-weight {
                 font-size: 0.8rem;
             }
-            
-            .menu-date {
-                font-size: 0.85rem;
-            }
         }
 
         .map-container {
@@ -1094,6 +1093,69 @@
             width: 100%;
             height: 100%;
             border: none;
+        }
+        
+        /* Стили для форм */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid rgba(212,175,55,0.4);
+            border-radius: 8px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212,175,55,0.3);
+        }
+        
+        .form-submit {
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            padding: 12px 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .form-submit:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(212,175,55,0.3);
+        }
+        
+        .success-message {
+            color: #4CAF50;
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #4CAF50;
+            border-radius: 8px;
+            background: rgba(76,175,80,0.1);
+            margin-top: 20px;
         }
 
         /* ===== ФУТЕР ===== */
@@ -1325,6 +1387,8 @@
         <div class="nav-container">
             <button class="nav-btn" data-modal="menu"><span>Меню</span><div class="shine"></div></button>
             <button class="nav-btn" data-modal="gallery"><span>Фотогалерея</span><div class="shine"></div></button>
+            <button class="nav-btn" data-modal="delivery"><span>Доставка</span><div class="shine"></div></button>
+            <button class="nav-btn" data-modal="rent"><span>Аренда</span><div class="shine"></div></button>
             <button class="nav-btn" data-modal="reviews"><span>Отзывы</span><div class="shine"></div></button>
             <button class="nav-btn" data-modal="about"><span>О нас</span><div class="shine"></div></button>
         </div>
@@ -1339,6 +1403,8 @@
         <div class="mobile-nav" id="mobileNav">
             <button class="nav-btn" data-modal="menu"><span>Меню</span><div class="shine"></div></button>
             <button class="nav-btn" data-modal="gallery"><span>Фотогалерея</span><div class="shine"></div></button>
+            <button class="nav-btn" data-modal="delivery"><span>Доставка</span><div class="shine"></div></button>
+            <button class="nav-btn" data-modal="rent"><span>Аренда</span><div class="shine"></div></button>
             <button class="nav-btn" data-modal="reviews"><span>Отзывы</span><div class="shine"></div></button>
             <button class="nav-btn" data-modal="about"><span>О нас</span><div class="shine"></div></button>
             <button class="nav-btn" data-modal="contact"><span>Контакты</span><div class="shine"></div></button>
@@ -1381,7 +1447,7 @@
                     </div>
                 </div>
 
-                <button class="cta-main" data-modal="contact">Забронировать стол</button>
+                <button class="cta-main" id="degustationBtn">Приглашаем на дегустацию</button>
             </div>
         </div>
     </div>
@@ -1401,6 +1467,7 @@
             <div class="modal-body">
                 <p>Столовая «ЯКОРЯ» — это концептуальное пространство, переосмысливающее идею корпоративного питания.</p>
                 <p>Наша философия: свежие продукты, честная кухня, внимание к гостю. Шеф-повар с 20-летним опытом разрабатывает меню ежедневно.</p>
+                <p><strong style="color: var(--gold);">Email:</strong> foodiakor69@tver-pk.ru</p>
                 
                 <div class="map-container">
                     <iframe src="https://yandex.ru/map-widget/v1/?z=16&ol=biz&oid=215055081540" allowfullscreen></iframe>
@@ -1415,170 +1482,55 @@
             <button class="modal-close" data-close="menu">×</button>
             <h2 class="modal-title">Меню на неделю</h2>
             <div class="modal-body">
-                <table class="menu-table">
-                    <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Наименование</th>
-                            <th>Выход, гр</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- 09.03.2026 -->
-                        <tr>
-                            <td class="menu-date" rowspan="5">09.03.2026</td>
-                            <td class="menu-dish">Салат Витаминный</td>
-                            <td class="menu-weight">1/120</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Рассольник с курицей и сметаной</td>
-                            <td class="menu-weight">1/250/30</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Печень говяжья по-строгановски</td>
-                            <td class="menu-weight">1/100</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Пюре картофельное</td>
-                            <td class="menu-weight">1/150</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Морс ягодный</td>
-                            <td class="menu-weight">1/200</td>
-                        </tr>
-                        
-                        <!-- Разделитель -->
-                        <tr class="day-separator"><td colspan="3"></td></tr>
-                        
-                        <!-- 10.03.2026 -->
-                        <tr>
-                            <td class="menu-date" rowspan="5">10.03.2026</td>
-                            <td class="menu-dish">Салат с ветчиной и сыром</td>
-                            <td class="menu-weight">1/120</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Щи из свежей капусты с курицей</td>
-                            <td class="menu-weight">1/250/30</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Фрикасе из курицы с овощами</td>
-                            <td class="menu-weight">1/100/30</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Крупа гречневая</td>
-                            <td class="menu-weight">1/150</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Компот из сухофруктов</td>
-                            <td class="menu-weight">1/200</td>
-                        </tr>
-                        
-                        <!-- Разделитель -->
-                        <tr class="day-separator"><td colspan="3"></td></tr>
-                        
-                        <!-- 11.03.2026 -->
-                        <tr>
-                            <td class="menu-date" rowspan="5">11.03.2026</td>
-                            <td class="menu-dish">Морковь по-корейски</td>
-                            <td class="menu-weight">1/120</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Борщ со свининой и сметаной</td>
-                            <td class="menu-weight">1/250/30</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Биточки куриные</td>
-                            <td class="menu-weight">1/100</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Рис отварной</td>
-                            <td class="menu-weight">1/150</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Сок фруктовый</td>
-                            <td class="menu-weight">1/200</td>
-                        </tr>
-                        
-                        <!-- Разделитель -->
-                        <tr class="day-separator"><td colspan="3"></td></tr>
-                        
-                        <!-- 12.03.2026 -->
-                        <tr>
-                            <td class="menu-date" rowspan="5">12.03.2026</td>
-                            <td class="menu-dish">Салат Оливье с ветчиной</td>
-                            <td class="menu-weight">1/120</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Суп гороховый с копченностями</td>
-                            <td class="menu-weight">1/250</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Тефтели свино-говяжьи с соусом</td>
-                            <td class="menu-weight">1/100</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Макароны отварные</td>
-                            <td class="menu-weight">1/150</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Морс ягодный</td>
-                            <td class="menu-weight">1/200</td>
-                        </tr>
-                        
-                        <!-- Разделитель -->
-                        <tr class="day-separator"><td colspan="3"></td></tr>
-                        
-                        <!-- 13.03.2026 -->
-                        <tr>
-                            <td class="menu-date" rowspan="5">13.03.2026</td>
-                            <td class="menu-dish">Салат из свежих овощей</td>
-                            <td class="menu-weight">1/120</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Уха с белой рыбой</td>
-                            <td class="menu-weight">1/250</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Поджарка из свинины</td>
-                            <td class="menu-weight">1/100/50</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Картофель отварной</td>
-                            <td class="menu-weight">1/150</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Компот из сухофруктов</td>
-                            <td class="menu-weight">1/200</td>
-                        </tr>
-                        
-                        <!-- Разделитель -->
-                        <tr class="day-separator"><td colspan="3"></td></tr>
-                        
-                        <!-- 14-15.03.2026 -->
-                        <tr>
-                            <td class="menu-date" rowspan="5">14-15.03.2026</td>
-                            <td class="menu-dish">Салат из свежих овощей</td>
-                            <td class="menu-weight">1/120</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Уха с белой рыбой</td>
-                            <td class="menu-weight">1/250</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Поджарка из свинины</td>
-                            <td class="menu-weight">1/100/50</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Картофель отварной</td>
-                            <td class="menu-weight">1/150</td>
-                        </tr>
-                        <tr>
-                            <td class="menu-dish">Компот из сухофруктов</td>
-                            <td class="menu-weight">1/200</td>
-                        </tr>
-                    </tbody>
-                </table>
-                
+                <div class="menu-container">
+                    <table class="menu-table">
+                        <thead>
+                            <tr>
+                                <th>Наименование</th>
+                                <th>Выход, гр</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="menu-dish">Салат Витаминный</td><td class="menu-weight">1/120</td></tr>
+                            <tr><td class="menu-dish">Рассольник с курицей и сметаной</td><td class="menu-weight">1/250/30</td></tr>
+                            <tr><td class="menu-dish">Печень говяжья по-строгановски</td><td class="menu-weight">1/100</td></tr>
+                            <tr><td class="menu-dish">Пюре картофельное</td><td class="menu-weight">1/150</td></tr>
+                            <tr><td class="menu-dish">Морс ягодный</td><td class="menu-weight">1/200</td></tr>
+                            
+                            <tr class="day-separator"><td colspan="2">─────────────────────────────────</td></tr>
+                            
+                            <tr><td class="menu-dish">Салат с ветчиной и сыром</td><td class="menu-weight">1/120</td></tr>
+                            <tr><td class="menu-dish">Щи из свежей капусты с курицей</td><td class="menu-weight">1/250/30</td></tr>
+                            <tr><td class="menu-dish">Фрикасе из курицы с овощами</td><td class="menu-weight">1/100/30</td></tr>
+                            <tr><td class="menu-dish">Крупа гречневая</td><td class="menu-weight">1/150</td></tr>
+                            <tr><td class="menu-dish">Компот из сухофруктов</td><td class="menu-weight">1/200</td></tr>
+                            
+                            <tr class="day-separator"><td colspan="2">─────────────────────────────────</td></tr>
+                            
+                            <tr><td class="menu-dish">Морковь по-корейски</td><td class="menu-weight">1/120</td></tr>
+                            <tr><td class="menu-dish">Борщ со свининой и сметаной</td><td class="menu-weight">1/250/30</td></tr>
+                            <tr><td class="menu-dish">Биточки куриные</td><td class="menu-weight">1/100</td></tr>
+                            <tr><td class="menu-dish">Рис отварной</td><td class="menu-weight">1/150</td></tr>
+                            <tr><td class="menu-dish">Сок фруктовый</td><td class="menu-weight">1/200</td></tr>
+                            
+                            <tr class="day-separator"><td colspan="2">─────────────────────────────────</td></tr>
+                            
+                            <tr><td class="menu-dish">Салат Оливье с ветчиной</td><td class="menu-weight">1/120</td></tr>
+                            <tr><td class="menu-dish">Суп гороховый с копченностями</td><td class="menu-weight">1/250</td></tr>
+                            <tr><td class="menu-dish">Тефтели свино-говяжьи с соусом</td><td class="menu-weight">1/100</td></tr>
+                            <tr><td class="menu-dish">Макароны отварные</td><td class="menu-weight">1/150</td></tr>
+                            <tr><td class="menu-dish">Морс ягодный</td><td class="menu-weight">1/200</td></tr>
+                            
+                            <tr class="day-separator"><td colspan="2">─────────────────────────────────</td></tr>
+                            
+                            <tr><td class="menu-dish">Салат из свежих овощей</td><td class="menu-weight">1/120</td></tr>
+                            <tr><td class="menu-dish">Уха с белой рыбой</td><td class="menu-weight">1/250</td></tr>
+                            <tr><td class="menu-dish">Поджарка из свинины</td><td class="menu-weight">1/100/50</td></tr>
+                            <tr><td class="menu-dish">Картофель отварной</td><td class="menu-weight">1/150</td></tr>
+                            <tr><td class="menu-dish">Компот из сухофруктов</td><td class="menu-weight">1/200</td></tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="menu-note">
                     <span>Приятного аппетита!</span> • Меню обновляется ежедневно
                 </div>
@@ -1594,6 +1546,36 @@
                 <p>Пространство «ЯКОРЯ» — сочетание промышленной эстетики и домашнего уюта.</p>
                 <p>Панорамные окна, современный интерьер, вкусная еда.</p>
                 <p style="color: var(--gold); margin-top: 25px; font-size: 1.1rem;">Галерея скоро будет доступна</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-delivery" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close="delivery">×</button>
+            <h2 class="modal-title">Доставка</h2>
+            <div class="modal-body">
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <img src="https://lh3.googleusercontent.com/d/1ZbJclKiq2jvvTQnIDTeoG7GF56o-m1O3" alt="Доставка" style="width: 100%; max-width: 400px; border-radius: 15px; border: 2px solid var(--gold); margin-bottom: 20px;">
+                    <h3 style="color: var(--gold); font-size: 1.8rem; margin-bottom: 15px;">Работаем с юридическими лицами</h3>
+                    <p style="font-size: 1.1rem; line-height: 1.6;">Предоставляем все необходимые документы для организации питания вашего коллектива. Индивидуальный подход, качественное обслуживание, вкусная и полезная еда.</p>
+                    <p style="margin-top: 20px; color: var(--gold); font-weight: 500;">Свяжитесь с нами для обсуждения условий:</p>
+                    <p style="font-size: 1.2rem;">foodiakor69@tver-pk.ru</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-rent" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close="rent">×</button>
+            <h2 class="modal-title">Аренда</h2>
+            <div class="modal-body">
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <button class="nav-btn" id="rentHallBtn" style="background: rgba(212,175,55,0.2); border-color: var(--gold);">Аренда зала</button>
+                    <button class="nav-btn" id="rentCateringBtn" style="background: rgba(212,175,55,0.2); border-color: var(--gold);">Аренда зала с нашей кухней</button>
+                </div>
+                <div id="rentFormContainer" style="margin-top: 30px;"></div>
             </div>
         </div>
     </div>
@@ -1623,12 +1605,54 @@
                 Сб: 08:00 — 18:00</p>
                 
                 <p><strong style="color: var(--gold)">Телефон:</strong> +7 (XXX) XXX-XX-XX</p>
+                <p><strong style="color: var(--gold)">Email:</strong> foodiakor69@tver-pk.ru</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-degustation" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close="degustation">×</button>
+            <h2 class="modal-title">Дегустация</h2>
+            <div class="modal-body">
+                <div id="degustationConfirm" style="text-align: center;">
+                    <p style="font-size: 1.2rem; margin-bottom: 20px;">Дегустация проводится <strong style="color: var(--gold);">во вторник и четверг с 14:30 до 16:30</strong></p>
+                    <button class="form-submit" id="confirmDegustationBtn">Хочу участвовать</button>
+                </div>
+                <div id="degustationForm" style="display: none;">
+                    <h3 style="color: var(--gold); margin-bottom: 20px;">Заполните форму</h3>
+                    <form id="degustationFormElement">
+                        <div class="form-group">
+                            <label>Ваше имя *</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Контактный телефон *</label>
+                            <input type="tel" name="phone" required>
+                        </div>
+                        <button type="submit" class="form-submit">Отправить заявку</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Кастомный курсор — только для компьютеров
+        // Функция отправки на почту
+        function sendToEmail(data, type) {
+            const email = 'foodiakor69@tver-pk.ru';
+            const subject = encodeURIComponent(`Заявка: ${type}`);
+            let body = '';
+            
+            for (let key in data) {
+                body += `${key}: ${data[key]}\n`;
+            }
+            
+            window.location.href = `mailto:${email}?subject=${subject}&body=${encodeURIComponent(body)}`;
+            return true;
+        }
+
+        // Кастомный курсор
         const cursorAnchor = document.querySelector('.cursor-anchor');
         const cursorRing = document.querySelector('.cursor-ring');
         
@@ -1646,7 +1670,7 @@
             });
         }
 
-        // Создание частиц
+        // Частицы
         function createParticles() {
             const container = document.getElementById('particles');
             if (!container) return;
@@ -1705,7 +1729,6 @@
                 const modalType = this.getAttribute('data-modal');
                 openModal(modalType);
                 
-                // Закрываем мобильное меню после клика
                 const mobileNav = document.getElementById('mobileNav');
                 const menuToggle = document.getElementById('mobileMenuToggle');
                 if (mobileNav && mobileNav.classList.contains('active')) {
@@ -1743,7 +1766,7 @@
             }
         });
 
-        // Мобильное меню (бургер)
+        // Мобильное меню
         const menuToggle = document.getElementById('mobileMenuToggle');
         const mobileNav = document.getElementById('mobileNav');
 
@@ -1759,7 +1782,6 @@
                 }
             });
 
-            // Закрываем меню при клике вне его
             document.addEventListener('click', function(e) {
                 if (mobileNav && mobileNav.classList.contains('active') && 
                     !menuToggle.contains(e.target) && !mobileNav.contains(e.target)) {
@@ -1770,7 +1792,108 @@
             });
         }
 
-        // Эффект света
+        // Кнопка дегустации
+        const degustationBtn = document.getElementById('degustationBtn');
+        if (degustationBtn) {
+            degustationBtn.addEventListener('click', () => {
+                openModal('degustation');
+            });
+        }
+        
+        // Логика дегустации
+        const confirmBtn = document.getElementById('confirmDegustationBtn');
+        const confirmDiv = document.getElementById('degustationConfirm');
+        const formDiv = document.getElementById('degustationForm');
+        
+        if (confirmBtn) {
+            confirmBtn.addEventListener('click', () => {
+                confirmDiv.style.display = 'none';
+                formDiv.style.display = 'block';
+            });
+        }
+        
+        const degustationForm = document.getElementById('degustationFormElement');
+        if (degustationForm) {
+            degustationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const name = degustationForm.querySelector('[name="name"]').value;
+                const phone = degustationForm.querySelector('[name="phone"]').value;
+                
+                if (name && phone) {
+                    sendToEmail({ Имя: name, Телефон: phone, Тип: 'Заявка на дегустацию' }, 'Дегустация');
+                    alert('Заявка отправлена! Мы свяжемся с вами.');
+                    closeModal('degustation');
+                    confirmDiv.style.display = 'block';
+                    formDiv.style.display = 'none';
+                    degustationForm.reset();
+                } else {
+                    alert('Пожалуйста, заполните все поля');
+                }
+            });
+        }
+        
+        // Логика аренды
+        let currentRentType = '';
+        
+        const rentHallBtn = document.getElementById('rentHallBtn');
+        const rentCateringBtn = document.getElementById('rentCateringBtn');
+        const rentFormContainer = document.getElementById('rentFormContainer');
+        
+        function showRentForm(type) {
+            currentRentType = type;
+            rentFormContainer.innerHTML = `
+                <div style="background: rgba(0,0,0,0.6); padding: 20px; border-radius: 15px; border: 1px solid rgba(212,175,55,0.3);">
+                    <h3 style="color: var(--gold); margin-bottom: 20px;">${type === 'hall' ? 'Аренда зала' : 'Аренда зала с нашей кухней'}</h3>
+                    <form id="rentForm">
+                        <div class="form-group">
+                            <label>Ваше имя *</label>
+                            <input type="text" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Контактный телефон *</label>
+                            <input type="tel" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Желаемая дата проведения мероприятия *</label>
+                            <input type="date" name="date" required>
+                        </div>
+                        <button type="submit" class="form-submit">Отправить заявку</button>
+                    </form>
+                </div>
+            `;
+            
+            const rentForm = document.getElementById('rentForm');
+            if (rentForm) {
+                rentForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = rentForm.querySelector('[name="name"]').value;
+                    const phone = rentForm.querySelector('[name="phone"]').value;
+                    const date = rentForm.querySelector('[name="date"]').value;
+                    
+                    if (name && phone && date) {
+                        sendToEmail({ 
+                            Имя: name, 
+                            Телефон: phone, 
+                            Дата: date, 
+                            Тип: currentRentType === 'hall' ? 'Аренда зала' : 'Аренда зала с нашей кухней' 
+                        }, 'Аренда');
+                        alert('Заявка отправлена! Мы свяжемся с вами.');
+                        closeModal('rent');
+                    } else {
+                        alert('Пожалуйста, заполните все поля');
+                    }
+                });
+            }
+        }
+        
+        if (rentHallBtn) {
+            rentHallBtn.addEventListener('click', () => showRentForm('hall'));
+        }
+        if (rentCateringBtn) {
+            rentCateringBtn.addEventListener('click', () => showRentForm('catering'));
+        }
+
+        // Эффекты
         const aboutBtn = document.querySelector('[data-modal="about"]');
         const windowGlow = document.getElementById('windowGlow');
         
@@ -1787,7 +1910,7 @@
             });
         }
 
-        // Параллакс для фона — только на компьютерах
+        // Параллакс
         if (window.matchMedia('(hover: hover)').matches) {
             document.addEventListener('mousemove', (e) => {
                 const x = (e.clientX / window.innerWidth - 0.5) * 15;
@@ -1800,7 +1923,6 @@
             });
         }
 
-        // Корректировка фонового изображения при изменении размера окна
         window.addEventListener('resize', function() {
             const building = document.querySelector('.building-image');
             if (building) {
