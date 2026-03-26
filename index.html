@@ -194,10 +194,10 @@
             z-index: 3;
         }
 
-        /* ===== ЛОГОТИП - ПОДНЯТ ВЫШЕ ===== */
+        /* ===== ЛОГОТИП ===== */
         .logo-section {
             position: absolute;
-            top: 3%;
+            top: 2%;
             left: 2%;
             z-index: 12;
         }
@@ -223,16 +223,12 @@
             .logo-ring {
                 animation: ringSpin 10s linear infinite;
             }
-            .custom-logo {
-                animation: logoShine 4s ease-in-out infinite;
-            }
         }
 
         @media (max-width: 768px) {
             .logo-wrapper {
                 width: 80px;
                 height: 80px;
-                box-shadow: 0 0 25px rgba(212,175,55,0.5);
             }
             .logo-section {
                 top: 2%;
@@ -294,56 +290,58 @@
             display: block;
         }
 
-        @keyframes logoShine {
-            0%, 100% { filter: brightness(1); }
-            50% { filter: brightness(1.1); }
-        }
-
-        /* ===== КНОПКИ НАВИГАЦИИ - УМЕНЬШЕННЫЕ ===== */
+        /* ===== КНОПКИ НАВИГАЦИИ - УВЕЛИЧЕНЫ НА 30% ===== */
         .nav-container {
             position: absolute;
             top: 2%;
             left: 50%;
             transform: translateX(-50%);
             width: auto;
-            max-width: 90%;
+            max-width: 95%;
             z-index: 11;
             display: flex;
             justify-content: center;
-            gap: 8px;
-            padding: 8px 20px;
-            background: rgba(0,0,0,0.5);
+            gap: 12px;
+            padding: 10px 28px;
+            background: rgba(0,0,0,0.55);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(212,175,55,0.3);
-            border-radius: 50px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            border: 1.5px solid rgba(212,175,55,0.4);
+            border-radius: 60px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.5);
             flex-wrap: wrap;
         }
 
         .nav-btn {
             position: relative;
-            padding: 8px 18px;
-            background: rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.2);
+            padding: 11px 24px;
+            background: rgba(0,0,0,0.5);
+            border: 1.5px solid rgba(255,255,255,0.25);
             color: #fff;
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             font-weight: 600;
             text-align: center;
             transition: all 0.3s ease;
             overflow: hidden;
-            border-radius: 40px;
+            border-radius: 45px;
             white-space: nowrap;
             cursor: pointer;
         }
 
-        @media (max-width: 1100px) {
+        @media (max-width: 1200px) {
             .nav-btn {
-                padding: 6px 12px;
-                font-size: 0.65rem;
-                letter-spacing: 0.08em;
+                padding: 9px 18px;
+                font-size: 0.75rem;
+                letter-spacing: 0.1em;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .nav-btn {
+                padding: 8px 14px;
+                font-size: 0.7rem;
             }
         }
 
@@ -360,16 +358,16 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
+            background: linear-gradient(90deg, transparent, rgba(212,175,55,0.5), transparent);
             transition: left 0.5s;
         }
 
         .nav-btn:hover {
             color: #000;
             border-color: var(--gold);
-            transform: translateY(-2px) scale(1.02);
-            box-shadow: 0 8px 20px rgba(212,175,55,0.4);
-            background: rgba(212,175,55,0.9);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(212,175,55,0.45);
+            background: rgba(212,175,55,0.95);
         }
 
         .nav-btn:hover::before {
@@ -387,8 +385,8 @@
             top: 2%;
             right: 5%;
             z-index: 20;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: rgba(0,0,0,0.7);
             border: 2px solid var(--gold);
             border-radius: 50%;
@@ -401,7 +399,7 @@
         }
 
         .mobile-menu-toggle span {
-            width: 20px;
+            width: 22px;
             height: 2px;
             background: var(--gold);
             border-radius: 2px;
@@ -426,12 +424,12 @@
             width: 75%;
             max-width: 280px;
             height: 100vh;
-            background: rgba(0,0,0,0.95);
+            background: rgba(0,0,0,0.96);
             backdrop-filter: blur(20px);
             z-index: 19;
             padding: 70px 15px 20px;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
             border-left: 2px solid var(--gold);
             transition: right 0.3s ease;
         }
@@ -442,8 +440,8 @@
 
         .mobile-nav .nav-btn {
             width: 100%;
-            padding: 10px;
-            font-size: 0.8rem;
+            padding: 12px;
+            font-size: 0.85rem;
             background: rgba(212,175,55,0.1);
             border-color: var(--gold);
             white-space: normal;
@@ -713,7 +711,6 @@
             font-size: 1rem;
         }
 
-        /* Стили для меню - БЕЗ КАРТИНОК */
         .menu-container {
             background: linear-gradient(135deg, rgba(40,28,20,0.9) 0%, rgba(25,18,12,0.95) 100%);
             backdrop-filter: blur(5px);
@@ -797,7 +794,7 @@
             font-size: 0.9rem;
         }
         
-        .form-group input {
+        .form-group input, .form-group select {
             width: 100%;
             padding: 10px 12px;
             background: rgba(0,0,0,0.6);
@@ -808,7 +805,7 @@
             font-size: 0.95rem;
         }
         
-        .form-group input:focus {
+        .form-group input:focus, .form-group select:focus {
             outline: none;
             border-color: var(--gold);
         }
@@ -863,6 +860,33 @@
             background: var(--gold);
             color: #000;
             transform: translateY(-3px);
+        }
+        
+        .delivery-contact-btn {
+            display: block;
+            width: 100%;
+            max-width: 300px;
+            margin: 25px auto 0;
+            padding: 14px 25px;
+            background: transparent;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+        }
+        
+        .delivery-contact-btn:hover {
+            background: var(--gold);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212,175,55,0.4);
         }
         
         @media (max-width: 700px) {
@@ -1021,7 +1045,7 @@
             <div class="modal-body">
                 <div class="menu-container">
                     <table class="menu-table">
-                        <thead><tr><th>Наименование</th><th>Выход, гр</th></tr></thead>
+                        <thead><tr><th>Наименование</th><th>Выход, гр</th></thead>
                         <tbody>
                             <tr><td class="menu-dish">Салат Витаминный</td><td class="menu-weight">1/120</td></tr>
                             <tr><td class="menu-dish">Рассольник с курицей и сметаной</td><td class="menu-weight">1/250/30</td></tr>
@@ -1075,10 +1099,27 @@
             <div class="modal-body">
                 <div style="text-align:center;">
                     <img src="https://lh3.googleusercontent.com/d/1ZbJclKiq2jvvTQnIDTeoG7GF56o-m1O3" alt="Доставка" style="width:100%; max-width:300px; border-radius:15px; border:2px solid var(--gold); margin-bottom:20px;">
-                    <h3 style="color:var(--gold);">Работаем с юридическими лицами</h3>
+                    <h3 style="color:var(--gold); margin-bottom:15px;">Работаем с юридическими лицами</h3>
                     <p>Предоставляем все необходимые документы для организации питания вашего коллектива.</p>
-                    <p style="margin-top:15px; color:var(--gold);">foodiakor69@tver-pk.ru</p>
+                    <p style="margin:15px 0;">Индивидуальные условия, доставка обедов в офис.</p>
+                    <button class="delivery-contact-btn" id="deliveryContactBtn">Связаться с нами</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для связи (доставка) -->
+    <div id="modal-delivery-form" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" data-close="delivery-form">×</button>
+            <h2 class="modal-title">Связаться с нами</h2>
+            <div class="modal-body">
+                <form id="deliveryFormElement">
+                    <div class="form-group"><label>Ваше имя *</label><input type="text" name="name" required></div>
+                    <div class="form-group"><label>Контактный телефон *</label><input type="tel" name="phone" required></div>
+                    <div class="form-group"><label>Комментарий (необязательно)</label><input type="text" name="comment"></div>
+                    <button type="submit" class="form-submit">Отправить заявку</button>
+                </form>
             </div>
         </div>
     </div>
@@ -1143,13 +1184,63 @@
     </div>
 
     <script>
+        // ========== НАСТРОЙКА TELEGRAM БОТА ==========
+        // 1. Создайте бота через @BotFather в Telegram, получите TOKEN
+        // 2. Напишите боту /start, затем получите свой CHAT_ID через @userinfobot
+        // 3. Вставьте значения ниже:
+        const TELEGRAM_BOT_TOKEN = "YOUR_BOT_TOKEN";  // Замените на ваш токен
+        const TELEGRAM_CHAT_ID = "YOUR_CHAT_ID";      // Замените на ваш chat_id
+        
+        // Функция отправки в Telegram
+        async function sendToTelegram(data, type) {
+            const message = `🔔 <b>НОВАЯ ЗАЯВКА: ${type}</b>%0A%0A` + 
+                Object.entries(data).map(([k,v]) => `<b>${k}:</b> ${v}`).join('%0A') +
+                `%0A%0A🕒 ${new Date().toLocaleString('ru-RU')}`;
+            
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                if (response.ok) {
+                    alert('Заявка успешно отправлена! Мы свяжемся с вами.');
+                    return true;
+                } else {
+                    // Если Telegram не настроен, используем fallback на email
+                    return sendToEmail(data, type);
+                }
+            } catch (error) {
+                console.log('Telegram error, using email fallback');
+                return sendToEmail(data, type);
+            }
+        }
+        
+        // Резервный вариант - отправка на почту
         function sendToEmail(data, type) {
-            const email = 'iris.salnikov@yandex.ru';
+            const email = 'foodiakor69@tver-pk.ru';
             const subject = encodeURIComponent(`Заявка: ${type}`);
             let body = '';
             for (let key in data) body += `${key}: ${data[key]}\n`;
             window.location.href = `mailto:${email}?subject=${subject}&body=${encodeURIComponent(body)}`;
             return true;
+        }
+        
+        // Универсальная отправка (сначала Telegram, если не настроен - email)
+        async function submitForm(data, type) {
+            // Проверяем, настроен ли бот
+            if (TELEGRAM_BOT_TOKEN !== "YOUR_BOT_TOKEN" && TELEGRAM_CHAT_ID !== "YOUR_CHAT_ID") {
+                await sendToTelegram(data, type);
+            } else {
+                sendToEmail(data, type);
+                alert('Заявка отправлена! Мы свяжемся с вами.');
+            }
         }
 
         // Курсор
@@ -1198,18 +1289,31 @@
         // Дегустация
         document.getElementById('degustationBtn')?.addEventListener('click',()=>openModal('degustation'));
         document.getElementById('confirmDegustationBtn')?.addEventListener('click',()=>{ document.getElementById('degustationConfirm').style.display='none'; document.getElementById('degustationForm').style.display='block'; });
-        document.getElementById('degustationFormElement')?.addEventListener('submit',(e)=>{
+        document.getElementById('degustationFormElement')?.addEventListener('submit',async (e)=>{
             e.preventDefault();
             const name = e.target.querySelector('[name="name"]').value;
             const phone = e.target.querySelector('[name="phone"]').value;
             if(name && phone){
-                sendToEmail({Имя:name, Телефон:phone, Тип:'Заявка на дегустацию'}, 'Дегустация');
-                alert('Заявка отправлена! Мы свяжемся с вами.');
+                await submitForm({Имя:name, Телефон:phone, Тип:'Заявка на дегустацию'}, 'Дегустация');
                 closeModal('degustation');
                 document.getElementById('degustationConfirm').style.display='block';
                 document.getElementById('degustationForm').style.display='none';
                 e.target.reset();
             } else alert('Заполните все поля');
+        });
+
+        // Доставка - кнопка "Связаться с нами"
+        document.getElementById('deliveryContactBtn')?.addEventListener('click',()=>openModal('delivery-form'));
+        document.getElementById('deliveryFormElement')?.addEventListener('submit',async (e)=>{
+            e.preventDefault();
+            const name = e.target.querySelector('[name="name"]').value;
+            const phone = e.target.querySelector('[name="phone"]').value;
+            const comment = e.target.querySelector('[name="comment"]').value || '';
+            if(name && phone){
+                await submitForm({Имя:name, Телефон:phone, Комментарий:comment, Тип:'Заявка на доставку'}, 'Доставка');
+                closeModal('delivery-form');
+                e.target.reset();
+            } else alert('Заполните имя и телефон');
         });
 
         // Аренда
@@ -1226,15 +1330,14 @@
                         <button type="submit" class="form-submit">Отправить заявку</button>
                     </form>
                 </div>`;
-            document.getElementById('rentForm')?.addEventListener('submit',(e)=>{
+            document.getElementById('rentForm')?.addEventListener('submit',async (e)=>{
                 e.preventDefault();
                 const f = e.target;
                 const name = f.querySelector('[name="name"]').value;
                 const phone = f.querySelector('[name="phone"]').value;
                 const date = f.querySelector('[name="date"]').value;
                 if(name && phone && date){
-                    sendToEmail({Имя:name, Телефон:phone, Дата:date, Тип: rentType==='hall'?'Аренда зала':'Аренда зала с нашей кухней'}, 'Аренда');
-                    alert('Заявка отправлена! Мы свяжемся с вами.');
+                    await submitForm({Имя:name, Телефон:phone, Дата:date, Тип: rentType==='hall'?'Аренда зала':'Аренда зала с нашей кухней'}, 'Аренда');
                     closeModal('rent');
                 } else alert('Заполните все поля');
             });
