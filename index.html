@@ -1054,7 +1054,7 @@
     <!-- Модальные окна -->
     <div id="modal-about" class="modal"><div class="modal-content"><button class="modal-close" data-close="about">×</button><h2 class="modal-title">О нас</h2><div class="modal-body"><p>Столовая «ЯКОРЯ» — концептуальное пространство корпоративного питания.</p><p><strong style="color:var(--gold);">Email:</strong> foodiakor69@tver-pk.ru</p><div class="map-container" style="height:250px; margin-top:15px;"><iframe src="https://yandex.ru/map-widget/v1/?z=16&ol=biz&oid=215055081540" allowfullscreen style="width:100%;height:100%;border:none;"></iframe></div></div></div></div>
     
-    <div id="modal-menu" class="modal"><div class="modal-content"><button class="modal-close" data-close="menu">×</button><h2 class="modal-title">Меню на неделю</h2><div class="modal-body"><div class="menu-container"><table class="menu-table"><thead> <tr><th>Наименование</th><th>Выход, гр</th></tr></thead><tbody><tr><td>Салат Витаминный</td><td class="menu-weight">1/120</td></tr><tr><td>Рассольник с курицей</td><td class="menu-weight">1/250/30</td></tr><tr><td>Печень по-строгановски</td><td class="menu-weight">1/100</td></tr><tr><td>Пюре картофельное</td><td class="menu-weight">1/150</td></tr><tr><td>Морс ягодный</td><td class="menu-weight">1/200</td></tr></tbody></table></div><div class="menu-note"><span>Приятного аппетита!</span></div></div></div></div>
+    <div id="modal-menu" class="modal"><div class="modal-content"><button class="modal-close" data-close="menu">×</button><h2 class="modal-title">Меню на неделю</h2><div class="modal-body"><div class="menu-container"><table class="menu-table"><thead>  <tr><th>Наименование</th><th>Выход, гр</th></tr></thead><tbody><tr><td class="menu-dish">Салат Витаминный</td><td class="menu-weight">1/120</td></tr><tr><td class="menu-dish">Рассольник с курицей</td><td class="menu-weight">1/250/30</td></tr><tr><td class="menu-dish">Печень по-строгановски</td><td class="menu-weight">1/100</td></tr><tr><td class="menu-dish">Пюре картофельное</td><td class="menu-weight">1/150</td></tr><tr><td class="menu-dish">Морс ягодный</td><td class="menu-weight">1/200</td></tr></tbody></table></div><div class="menu-note"><span>Приятного аппетита!</span></div></div></div></div>
     
     <div id="modal-gallery" class="modal"><div class="modal-content"><button class="modal-close" data-close="gallery">×</button><h2 class="modal-title">Фотогалерея</h2><div class="modal-body"><p>Галерея скоро будет доступна</p></div></div></div>
     
@@ -1072,42 +1072,38 @@
 
     <script>
         // ========== НАСТРОЙКА GOOGLE SHEETS ==========
-        // ⚠️ ВСТАВЬТЕ СВОЙ URL ПОСЛЕ РАЗВЕРТЫВАНИЯ ВЕБ-ПРИЛОЖЕНИЯ!
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeXl3tFeDzprAE098_z9oz7b6IqhNE9CdPzB3rRETvR438UOvRkfvJ4hw2kfTwGi64/exec"; // ← ЗАМЕНИТЕ НА СВОЙ URL
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNE1Vvu40DHflJXdZXzu9wuzHyj__MaHUrAkRDX8WayPL5r8MbIWxeAmu7jCedswRi/exec";
         
-        // Локальное хранилище как кэш
-        let cachedRequests = [];
-        
-        // ========== ОТПРАВКА В GOOGLE TABLES ==========
+        // ========== ОТПРАВКА В GOOGLE SHEETS (исправленная) ==========
         async function sendToGoogleSheets(data, type) {
-            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbzeXl3tFeDzprAE098_z9oz7b6IqhNE9CdPzB3rRETvR438UOvRkfvJ4hw2kfTwGi64/exec") {
-                console.warn("Google Sheets не настроен, сохраняю локально");
-                saveToLocalStorage(data, type);
-                return false;
-            }
-            
             const payload = {
                 type: type,
                 name: data.имя || data.name,
                 phone: data.телефон || data.phone,
                 extra: data.дата || data.комментарий || '',
-                date: data.дата || ''
+                event_date: data.дата || ''
             };
             
             try {
+                // Используем обычный fetch без no-cors, чтобы получить ответ
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    },
                     body: JSON.stringify(payload)
                 });
                 
-                // При no-cors не можем прочитать ответ, но запрос ушел
-                console.log('Заявка отправлена в Google Sheets');
-                
-                // Сохраняем локально для отображения
-                saveToLocalStorage(data, type);
-                return true;
+                if (response.ok) {
+                    console.log('✅ Заявка отправлена в Google Sheets');
+                    // Сохраняем локально для отображения в админ-панели
+                    saveToLocalStorage(data, type);
+                    return true;
+                } else {
+                    console.error('Ошибка отправки:', await response.text());
+                    saveToLocalStorage(data, type);
+                    return false;
+                }
             } catch (error) {
                 console.error('Ошибка отправки:', error);
                 saveToLocalStorage(data, type);
@@ -1115,7 +1111,7 @@
             }
         }
         
-        // Локальное сохранение (резерв)
+        // Локальное сохранение
         function saveToLocalStorage(data, type) {
             const newRequest = {
                 id: Date.now(),
@@ -1126,13 +1122,11 @@
             let localRequests = JSON.parse(localStorage.getItem('canteen_requests') || '[]');
             localRequests.unshift(newRequest);
             localStorage.setItem('canteen_requests', JSON.stringify(localRequests));
-            cachedRequests = localRequests;
         }
         
-        // Загрузка заявок (из localStorage)
+        // Загрузка заявок из localStorage
         function loadRequestsFromLocal() {
-            cachedRequests = JSON.parse(localStorage.getItem('canteen_requests') || '[]');
-            return cachedRequests;
+            return JSON.parse(localStorage.getItem('canteen_requests') || '[]');
         }
         
         // ========== АДМИН-ПАНЕЛЬ ==========
@@ -1226,7 +1220,6 @@
         function clearLocalData() {
             if(confirm('Удалить все заявки ТОЛЬКО с этого устройства? (Заявки в Google Sheets останутся)')) {
                 localStorage.removeItem('canteen_requests');
-                cachedRequests = [];
                 renderAdminPanel();
                 alert('Локальные данные очищены');
             }
@@ -1370,7 +1363,7 @@
         }
         
         // Инициализация
-        loadRequestsFromLocal();
+        console.log('Сайт готов, URL Google Sheets:', GOOGLE_SCRIPT_URL);
     </script>
 </body>
 </html>
