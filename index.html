@@ -826,16 +826,6 @@
             color: #000;
         }
         
-        .admin-btn.danger {
-            border-color: #ff4444;
-            color: #ff4444;
-        }
-        
-        .admin-btn.danger:hover {
-            background: #ff4444;
-            color: #fff;
-        }
-        
         .stats {
             background: rgba(212,175,55,0.1);
             padding: 15px;
@@ -871,6 +861,20 @@
             border-radius: 8px;
         }
         
+        .refresh-btn {
+            background: rgba(212,175,55,0.2);
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .refresh-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+        
         .requests-table {
             width: 100%;
             border-collapse: collapse;
@@ -892,20 +896,16 @@
             background: rgba(212,175,55,0.1);
         }
         
-        .delete-row {
-            color: #ff4444;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
-        
-        .delete-row:hover {
-            color: #ff8888;
-        }
-        
         .empty-message {
             text-align: center;
             padding: 40px;
             color: #666;
+        }
+        
+        .loading-message {
+            text-align: center;
+            padding: 40px;
+            color: var(--gold);
         }
         
         @media (max-width: 768px) {
@@ -1024,14 +1024,15 @@
         </div>
     </footer>
 
-    <!-- Админ-панель (секретная) -->
+    <!-- Админ-панель -->
     <div id="adminPanel" class="admin-panel">
         <div class="admin-container">
             <div class="admin-header">
                 <h2>📋 Панель администратора</h2>
                 <div class="admin-buttons">
                     <button class="admin-btn" id="exportDataBtn">📎 Экспорт в CSV</button>
-                    <button class="admin-btn danger" id="clearAllBtn">🗑️ Очистить все</button>
+                    <button class="admin-btn" id="refreshDataBtn">🔄 Обновить</button>
+                    <button class="admin-btn danger" id="clearLocalBtn">🗑️ Очистить локально</button>
                     <button class="admin-btn" id="closeAdminBtn">✖️ Закрыть</button>
                 </div>
             </div>
@@ -1044,15 +1045,16 @@
                     <option value="Аренда зала">Аренда зала</option>
                     <option value="Аренда зала с нашей кухней">Аренда с кухней</option>
                 </select>
+                <button class="refresh-btn" id="manualRefreshBtn">🔄 Обновить список</button>
             </div>
-            <div id="requestsList"></div>
+            <div id="requestsList"><div class="loading-message">📡 Загрузка заявок...</div></div>
         </div>
     </div>
 
-    <!-- Остальные модальные окна (сокращены для экономии места, но функционал сохранен) -->
-    <div id="modal-about" class="modal"><div class="modal-content"><button class="modal-close" data-close="about">×</button><h2 class="modal-title">О нас</h2><div class="modal-body"><p>Столовая «ЯКОРЯ» — концептуальное пространство корпоративного питания.</p><p><strong style="color:var(--gold);">Email:</strong> foodiakor69@tver-pk.ru</p><div class="map-container"><iframe src="https://yandex.ru/map-widget/v1/?z=16&ol=biz&oid=215055081540" allowfullscreen></iframe></div></div></div></div>
+    <!-- Модальные окна -->
+    <div id="modal-about" class="modal"><div class="modal-content"><button class="modal-close" data-close="about">×</button><h2 class="modal-title">О нас</h2><div class="modal-body"><p>Столовая «ЯКОРЯ» — концептуальное пространство корпоративного питания.</p><p><strong style="color:var(--gold);">Email:</strong> foodiakor69@tver-pk.ru</p><div class="map-container" style="height:250px; margin-top:15px;"><iframe src="https://yandex.ru/map-widget/v1/?z=16&ol=biz&oid=215055081540" allowfullscreen style="width:100%;height:100%;border:none;"></iframe></div></div></div></div>
     
-    <div id="modal-menu" class="modal"><div class="modal-content"><button class="modal-close" data-close="menu">×</button><h2 class="modal-title">Меню на неделю</h2><div class="modal-body"><div class="menu-container"><table class="menu-table"><thead><tr><th>Наименование</th><th>Выход, гр</th></tr></thead><tbody><tr><td>Салат Витаминный</td><td class="menu-weight">1/120</td></tr><tr><td>Рассольник с курицей</td><td class="menu-weight">1/250/30</td></tr><tr><td class="menu-dish">Печень по-строгановски</td><td class="menu-weight">1/100</td></tr><tr><td class="menu-dish">Пюре картофельное</td><td class="menu-weight">1/150</td></tr><tr><td class="menu-dish">Морс ягодный</td><td class="menu-weight">1/200</td></tr></tbody></table></div><div class="menu-note"><span>Приятного аппетита!</span></div></div></div></div>
+    <div id="modal-menu" class="modal"><div class="modal-content"><button class="modal-close" data-close="menu">×</button><h2 class="modal-title">Меню на неделю</h2><div class="modal-body"><div class="menu-container"><table class="menu-table"><thead> <tr><th>Наименование</th><th>Выход, гр</th></tr></thead><tbody><tr><td>Салат Витаминный</td><td class="menu-weight">1/120</td></tr><tr><td>Рассольник с курицей</td><td class="menu-weight">1/250/30</td></tr><tr><td>Печень по-строгановски</td><td class="menu-weight">1/100</td></tr><tr><td>Пюре картофельное</td><td class="menu-weight">1/150</td></tr><tr><td>Морс ягодный</td><td class="menu-weight">1/200</td></tr></tbody></table></div><div class="menu-note"><span>Приятного аппетита!</span></div></div></div></div>
     
     <div id="modal-gallery" class="modal"><div class="modal-content"><button class="modal-close" data-close="gallery">×</button><h2 class="modal-title">Фотогалерея</h2><div class="modal-body"><p>Галерея скоро будет доступна</p></div></div></div>
     
@@ -1069,40 +1071,71 @@
     <div id="modal-degustation" class="modal"><div class="modal-content"><button class="modal-close" data-close="degustation">×</button><h2 class="modal-title">Дегустация</h2><div class="modal-body"><div id="degustationConfirm" style="text-align:center;"><p>Дегустация проводится <strong style="color:var(--gold);">во вторник и четверг с 14:30 до 16:30</strong></p><button class="form-submit" id="confirmDegustationBtn">Хочу участвовать</button></div><div id="degustationForm" style="display:none;"><form id="degustationFormElement"><div class="form-group"><label>Ваше имя *</label><input type="text" name="name" required></div><div class="form-group"><label>Телефон *</label><input type="tel" name="phone" required></div><button type="submit" class="form-submit">Отправить</button></form></div></div></div></div>
 
     <script>
-        // ========== ХРАНЕНИЕ ЗАЯВОК В LOCALSTORAGE ==========
-        let requests = JSON.parse(localStorage.getItem('canteen_requests') || '[]');
+        // ========== НАСТРОЙКА GOOGLE SHEETS ==========
+        // ⚠️ ВСТАВЬТЕ СВОЙ URL ПОСЛЕ РАЗВЕРТЫВАНИЯ ВЕБ-ПРИЛОЖЕНИЯ!
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzeXl3tFeDzprAE098_z9oz7b6IqhNE9CdPzB3rRETvR438UOvRkfvJ4hw2kfTwGi64/exec"; // ← ЗАМЕНИТЕ НА СВОЙ URL
         
-        function saveRequests() {
-            localStorage.setItem('canteen_requests', JSON.stringify(requests));
+        // Локальное хранилище как кэш
+        let cachedRequests = [];
+        
+        // ========== ОТПРАВКА В GOOGLE TABLES ==========
+        async function sendToGoogleSheets(data, type) {
+            if (!GOOGLE_SCRIPT_URL || GOOGLE_SCRIPT_URL === "https://script.google.com/macros/s/AKfycbzeXl3tFeDzprAE098_z9oz7b6IqhNE9CdPzB3rRETvR438UOvRkfvJ4hw2kfTwGi64/exec") {
+                console.warn("Google Sheets не настроен, сохраняю локально");
+                saveToLocalStorage(data, type);
+                return false;
+            }
+            
+            const payload = {
+                type: type,
+                name: data.имя || data.name,
+                phone: data.телефон || data.phone,
+                extra: data.дата || data.комментарий || '',
+                date: data.дата || ''
+            };
+            
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                
+                // При no-cors не можем прочитать ответ, но запрос ушел
+                console.log('Заявка отправлена в Google Sheets');
+                
+                // Сохраняем локально для отображения
+                saveToLocalStorage(data, type);
+                return true;
+            } catch (error) {
+                console.error('Ошибка отправки:', error);
+                saveToLocalStorage(data, type);
+                return false;
+            }
         }
         
-        function addRequest(type, data) {
+        // Локальное сохранение (резерв)
+        function saveToLocalStorage(data, type) {
             const newRequest = {
                 id: Date.now(),
                 type: type,
                 ...data,
-                date: new Date().toLocaleString('ru-RU')
+                dateTime: new Date().toLocaleString('ru-RU')
             };
-            requests.unshift(newRequest);
-            saveRequests();
-            return newRequest;
+            let localRequests = JSON.parse(localStorage.getItem('canteen_requests') || '[]');
+            localRequests.unshift(newRequest);
+            localStorage.setItem('canteen_requests', JSON.stringify(localRequests));
+            cachedRequests = localRequests;
         }
         
-        function deleteRequest(id) {
-            requests = requests.filter(r => r.id != id);
-            saveRequests();
-            renderAdminPanel();
+        // Загрузка заявок (из localStorage)
+        function loadRequestsFromLocal() {
+            cachedRequests = JSON.parse(localStorage.getItem('canteen_requests') || '[]');
+            return cachedRequests;
         }
         
-        function clearAllRequests() {
-            if(confirm('Удалить все заявки?')) {
-                requests = [];
-                saveRequests();
-                renderAdminPanel();
-            }
-        }
-        
-        // ========== АДМИН-ПАНЕЛЬ (секретная кнопка) ==========
+        // ========== АДМИН-ПАНЕЛЬ ==========
         let clickCount = 0;
         let clickTimer;
         
@@ -1128,6 +1161,7 @@
         }
         
         function renderAdminPanel() {
+            const requests = loadRequestsFromLocal();
             const filterType = document.getElementById('filterType')?.value || 'all';
             let filtered = filterType === 'all' ? requests : requests.filter(r => r.type === filterType);
             
@@ -1146,7 +1180,7 @@
                 return;
             }
             
-            let tableHtml = `<table class="requests-table"><thead><tr><th>Дата</th><th>Тип</th><th>Имя</th><th>Телефон</th><th>Дополнительно</th><th></th></tr></thead><tbody>`;
+            let tableHtml = `<table class="requests-table"><thead><tr><th>Дата</th><th>Тип</th><th>Имя</th><th>Телефон</th><th>Дополнительно</th></tr></thead><tbody>`;
             
             filtered.forEach(r => {
                 let extra = '';
@@ -1154,12 +1188,11 @@
                 if(r.комментарий) extra = `💬 ${r.комментарий}`;
                 tableHtml += `
                     <tr>
-                        <td>${r.date}</td>
+                        <td>${r.dateTime || r.date || ''}</td>
                         <td style="color:var(--gold);">${r.type}</td>
                         <td>${r.имя || r.name || ''}</td>
                         <td>${r.телефон || r.phone || ''}</td>
                         <td>${extra}</td>
-                        <td class="delete-row" onclick="deleteRequest(${r.id})">🗑️</td>
                     </tr>
                 `;
             });
@@ -1169,6 +1202,7 @@
         
         // Экспорт в CSV
         function exportToCSV() {
+            const requests = loadRequestsFromLocal();
             if(requests.length === 0) {
                 alert('Нет данных для экспорта');
                 return;
@@ -1176,22 +1210,31 @@
             let csv = "Дата,Тип,Имя,Телефон,Дополнительно\n";
             requests.forEach(r => {
                 let extra = r.дата ? `Дата: ${r.дата}` : (r.комментарий ? r.комментарий : '');
-                csv += `"${r.date}","${r.type}","${r.имя || r.name || ''}","${r.телефон || r.phone || ''}","${extra}"\n`;
+                csv += `"${r.dateTime || r.date || ''}","${r.type}","${r.имя || r.name || ''}","${r.телефон || r.phone || ''}","${extra}"\n`;
             });
             const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
             const link = document.createElement("a");
             const url = URL.createObjectURL(blob);
             link.href = url;
-            link.setAttribute("download", "zayavki.csv");
+            link.setAttribute("download", `zayavki_${new Date().toISOString().slice(0,10)}.csv`);
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
         }
         
+        function clearLocalData() {
+            if(confirm('Удалить все заявки ТОЛЬКО с этого устройства? (Заявки в Google Sheets останутся)')) {
+                localStorage.removeItem('canteen_requests');
+                cachedRequests = [];
+                renderAdminPanel();
+                alert('Локальные данные очищены');
+            }
+        }
+        
         // ========== ОБРАБОТКА ФОРМ ==========
         async function handleSubmit(formData, type) {
-            addRequest(type, formData);
+            await sendToGoogleSheets(formData, type);
             alert('✅ Заявка отправлена! Мы свяжемся с вами.');
             return true;
         }
@@ -1212,6 +1255,7 @@
                 document.getElementById('degustationConfirm').style.display = 'block';
                 document.getElementById('degustationForm').style.display = 'none';
                 e.target.reset();
+                renderAdminPanel();
             }
         });
         
@@ -1225,6 +1269,7 @@
                 await handleSubmit({ имя: name, телефон: phone }, 'Доставка');
                 closeModal('delivery-form');
                 e.target.reset();
+                renderAdminPanel();
             }
         });
         
@@ -1248,6 +1293,7 @@
                 if(name && phone && date) {
                     await handleSubmit({ имя: name, телефон: phone, дата: date }, typeName);
                     closeModal('rent');
+                    renderAdminPanel();
                 }
             });
         }
@@ -1277,7 +1323,9 @@
         // Админ-панель кнопки
         document.getElementById('closeAdminBtn')?.addEventListener('click', closeAdminPanel);
         document.getElementById('exportDataBtn')?.addEventListener('click', exportToCSV);
-        document.getElementById('clearAllBtn')?.addEventListener('click', clearAllRequests);
+        document.getElementById('clearLocalBtn')?.addEventListener('click', clearLocalData);
+        document.getElementById('refreshDataBtn')?.addEventListener('click', () => renderAdminPanel());
+        document.getElementById('manualRefreshBtn')?.addEventListener('click', () => renderAdminPanel());
         document.getElementById('filterType')?.addEventListener('change', renderAdminPanel);
         
         // Мобильное меню
@@ -1320,6 +1368,9 @@
                 setTimeout(() => { if(ring) ring.style.cssText = `left:${e.clientX-25}px;top:${e.clientY-25}px`; }, 50);
             });
         }
+        
+        // Инициализация
+        loadRequestsFromLocal();
     </script>
 </body>
 </html>
