@@ -194,7 +194,6 @@
             z-index: 3;
         }
 
-        /* ===== ЛОГОТИП ===== */
         .logo-section {
             position: absolute;
             top: 2%;
@@ -296,7 +295,6 @@
             display: block;
         }
 
-        /* ===== КНОПКИ НАВИГАЦИИ ===== */
         .nav-container {
             position: absolute;
             top: 2%;
@@ -587,7 +585,6 @@
             transform: translateY(-3px);
         }
 
-        /* Модальные окна */
         .modal {
             display: none;
             position: fixed;
@@ -764,7 +761,6 @@
             color: #000;
         }
         
-        /* Админ-панель */
         .admin-panel {
             display: none;
             position: fixed;
@@ -902,12 +898,6 @@
             color: #666;
         }
         
-        .loading-message {
-            text-align: center;
-            padding: 40px;
-            color: var(--gold);
-        }
-        
         @media (max-width: 768px) {
             .main-headline { font-size: 2.2rem; }
             .modal-content { padding: 25px 15px; }
@@ -1024,7 +1014,6 @@
         </div>
     </footer>
 
-    <!-- Админ-панель -->
     <div id="adminPanel" class="admin-panel">
         <div class="admin-container">
             <div class="admin-header">
@@ -1032,7 +1021,7 @@
                 <div class="admin-buttons">
                     <button class="admin-btn" id="exportDataBtn">📎 Экспорт в CSV</button>
                     <button class="admin-btn" id="refreshDataBtn">🔄 Обновить</button>
-                    <button class="admin-btn danger" id="clearLocalBtn">🗑️ Очистить локально</button>
+                    <button class="admin-btn danger" id="clearLocalBtn">🗑️ Очистить</button>
                     <button class="admin-btn" id="closeAdminBtn">✖️ Закрыть</button>
                 </div>
             </div>
@@ -1047,14 +1036,14 @@
                 </select>
                 <button class="refresh-btn" id="manualRefreshBtn">🔄 Обновить список</button>
             </div>
-            <div id="requestsList"><div class="loading-message">📡 Загрузка заявок...</div></div>
+            <div id="requestsList"><div class="empty-message">📭 Нет заявок</div></div>
         </div>
     </div>
 
     <!-- Модальные окна -->
     <div id="modal-about" class="modal"><div class="modal-content"><button class="modal-close" data-close="about">×</button><h2 class="modal-title">О нас</h2><div class="modal-body"><p>Столовая «ЯКОРЯ» — концептуальное пространство корпоративного питания.</p><p><strong style="color:var(--gold);">Email:</strong> foodiakor69@tver-pk.ru</p><div class="map-container" style="height:250px; margin-top:15px;"><iframe src="https://yandex.ru/map-widget/v1/?z=16&ol=biz&oid=215055081540" allowfullscreen style="width:100%;height:100%;border:none;"></iframe></div></div></div></div>
     
-    <div id="modal-menu" class="modal"><div class="modal-content"><button class="modal-close" data-close="menu">×</button><h2 class="modal-title">Меню на неделю</h2><div class="modal-body"><div class="menu-container"><table class="menu-table"><thead>  <tr><th>Наименование</th><th>Выход, гр</th></tr></thead><tbody><tr><td class="menu-dish">Салат Витаминный</td><td class="menu-weight">1/120</td></tr><tr><td class="menu-dish">Рассольник с курицей</td><td class="menu-weight">1/250/30</td></tr><tr><td class="menu-dish">Печень по-строгановски</td><td class="menu-weight">1/100</td></tr><tr><td class="menu-dish">Пюре картофельное</td><td class="menu-weight">1/150</td></tr><tr><td class="menu-dish">Морс ягодный</td><td class="menu-weight">1/200</td></tr></tbody></table></div><div class="menu-note"><span>Приятного аппетита!</span></div></div></div></div>
+    <div id="modal-menu" class="modal"><div class="modal-content"><button class="modal-close" data-close="menu">×</button><h2 class="modal-title">Меню на неделю</h2><div class="modal-body"><div class="menu-container"><table class="menu-table"><thead><tr><th>Наименование</th><th>Выход, гр</th></tr></thead><tbody><tr><td>Салат Витаминный</td><td class="menu-weight">1/120</td></tr><tr><td>Рассольник с курицей</td><td class="menu-weight">1/250/30</td></tr><tr><td>Печень по-строгановски</td><td class="menu-weight">1/100</td></tr><tr><td>Пюре картофельное</td><td class="menu-weight">1/150</td></tr><tr><td>Морс ягодный</td><td class="menu-weight">1/200</td></tr></tbody></table></div><div class="menu-note"><span>Приятного аппетита!</span></div></div></div></div>
     
     <div id="modal-gallery" class="modal"><div class="modal-content"><button class="modal-close" data-close="gallery">×</button><h2 class="modal-title">Фотогалерея</h2><div class="modal-body"><p>Галерея скоро будет доступна</p></div></div></div>
     
@@ -1071,47 +1060,45 @@
     <div id="modal-degustation" class="modal"><div class="modal-content"><button class="modal-close" data-close="degustation">×</button><h2 class="modal-title">Дегустация</h2><div class="modal-body"><div id="degustationConfirm" style="text-align:center;"><p>Дегустация проводится <strong style="color:var(--gold);">во вторник и четверг с 14:30 до 16:30</strong></p><button class="form-submit" id="confirmDegustationBtn">Хочу участвовать</button></div><div id="degustationForm" style="display:none;"><form id="degustationFormElement"><div class="form-group"><label>Ваше имя *</label><input type="text" name="name" required></div><div class="form-group"><label>Телефон *</label><input type="tel" name="phone" required></div><button type="submit" class="form-submit">Отправить</button></form></div></div></div></div>
 
     <script>
-        // ========== НАСТРОЙКА GOOGLE SHEETS ==========
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxNE1Vvu40DHflJXdZXzu9wuzHyj__MaHUrAkRDX8WayPL5r8MbIWxeAmu7jCedswRi/exec";
+        // ========== ОТПРАВКА НА ПОЧТУ ЧЕРЕЗ FORMSUBMIT.CO ==========
+        // Бесплатный сервис, который отправляет данные на email
+        const FORM_ACTION_URL = "https://formsubmit.co/ajax/foodiakor69@tver-pk.ru";
         
-        // ========== ОТПРАВКА В GOOGLE SHEETS (исправленная) ==========
-        async function sendToGoogleSheets(data, type) {
-            const payload = {
-                type: type,
-                name: data.имя || data.name,
-                phone: data.телефон || data.phone,
-                extra: data.дата || data.комментарий || '',
-                event_date: data.дата || ''
-            };
+        async function sendToEmail(data, type) {
+            const formData = new FormData();
+            formData.append("_subject", `📋 Новая заявка: ${type}`);
+            formData.append("_template", "table");
+            formData.append("_captcha", "false");
+            formData.append("Тип заявки", type);
+            formData.append("Имя", data.имя || data.name);
+            formData.append("Телефон", data.телефон || data.phone);
+            if (data.дата) formData.append("Желаемая дата", data.дата);
+            if (data.комментарий) formData.append("Комментарий", data.комментарий);
+            formData.append("Время отправки", new Date().toLocaleString('ru-RU'));
             
             try {
-                // Используем обычный fetch без no-cors, чтобы получить ответ
-                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                const response = await fetch(FORM_ACTION_URL, {
                     method: 'POST',
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(payload)
+                    body: formData
                 });
                 
                 if (response.ok) {
-                    console.log('✅ Заявка отправлена в Google Sheets');
-                    // Сохраняем локально для отображения в админ-панели
+                    console.log('✅ Заявка отправлена на почту');
                     saveToLocalStorage(data, type);
                     return true;
                 } else {
-                    console.error('Ошибка отправки:', await response.text());
+                    console.error('Ошибка отправки');
                     saveToLocalStorage(data, type);
                     return false;
                 }
             } catch (error) {
-                console.error('Ошибка отправки:', error);
+                console.error('Ошибка:', error);
                 saveToLocalStorage(data, type);
                 return false;
             }
         }
         
-        // Локальное сохранение
+        // Локальное сохранение для админ-панели
         function saveToLocalStorage(data, type) {
             const newRequest = {
                 id: Date.now(),
@@ -1124,7 +1111,6 @@
             localStorage.setItem('canteen_requests', JSON.stringify(localRequests));
         }
         
-        // Загрузка заявок из localStorage
         function loadRequestsFromLocal() {
             return JSON.parse(localStorage.getItem('canteen_requests') || '[]');
         }
@@ -1159,7 +1145,6 @@
             const filterType = document.getElementById('filterType')?.value || 'all';
             let filtered = filterType === 'all' ? requests : requests.filter(r => r.type === filterType);
             
-            // Статистика
             const statsHtml = `
                 <div class="stat-item">📊 Всего: <span>${requests.length}</span></div>
                 <div class="stat-item">🍽️ Дегустация: <span>${requests.filter(r => r.type === 'Дегустация').length}</span></div>
@@ -1174,60 +1159,44 @@
                 return;
             }
             
-            let tableHtml = `<table class="requests-table"><thead><tr><th>Дата</th><th>Тип</th><th>Имя</th><th>Телефон</th><th>Дополнительно</th></tr></thead><tbody>`;
-            
+            let tableHtml = `<table class="requests-table"><thead> <tr><th>Дата</th><th>Тип</th><th>Имя</th><th>Телефон</th><th>Дополнительно</th></tr> </thead><tbody>`;
             filtered.forEach(r => {
                 let extra = '';
                 if(r.дата) extra = `📅 ${r.дата}`;
                 if(r.комментарий) extra = `💬 ${r.комментарий}`;
-                tableHtml += `
-                    <tr>
-                        <td>${r.dateTime || r.date || ''}</td>
-                        <td style="color:var(--gold);">${r.type}</td>
-                        <td>${r.имя || r.name || ''}</td>
-                        <td>${r.телефон || r.phone || ''}</td>
-                        <td>${extra}</td>
-                    </tr>
-                `;
+                tableHtml += `<tr><td>${r.dateTime}</td><td style="color:var(--gold);">${r.type}</td><td>${r.имя || r.name || ''}</td><td>${r.телефон || r.phone || ''}</td><td>${extra}</td></tr>`;
             });
             tableHtml += `</tbody></table>`;
             document.getElementById('requestsList').innerHTML = tableHtml;
         }
         
-        // Экспорт в CSV
         function exportToCSV() {
             const requests = loadRequestsFromLocal();
-            if(requests.length === 0) {
-                alert('Нет данных для экспорта');
-                return;
-            }
+            if(requests.length === 0) { alert('Нет данных'); return; }
             let csv = "Дата,Тип,Имя,Телефон,Дополнительно\n";
             requests.forEach(r => {
                 let extra = r.дата ? `Дата: ${r.дата}` : (r.комментарий ? r.комментарий : '');
-                csv += `"${r.dateTime || r.date || ''}","${r.type}","${r.имя || r.name || ''}","${r.телефон || r.phone || ''}","${extra}"\n`;
+                csv += `"${r.dateTime}","${r.type}","${r.имя || r.name}","${r.телефон || r.phone}","${extra}"\n`;
             });
             const blob = new Blob(["\uFEFF" + csv], { type: "text/csv;charset=utf-8;" });
             const link = document.createElement("a");
-            const url = URL.createObjectURL(blob);
-            link.href = url;
-            link.setAttribute("download", `zayavki_${new Date().toISOString().slice(0,10)}.csv`);
-            document.body.appendChild(link);
+            link.href = URL.createObjectURL(blob);
+            link.download = `zayavki_${new Date().toISOString().slice(0,10)}.csv`;
             link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
+            URL.revokeObjectURL(link.href);
         }
         
         function clearLocalData() {
-            if(confirm('Удалить все заявки ТОЛЬКО с этого устройства? (Заявки в Google Sheets останутся)')) {
+            if(confirm('Удалить все заявки?')) {
                 localStorage.removeItem('canteen_requests');
                 renderAdminPanel();
-                alert('Локальные данные очищены');
+                alert('Данные очищены');
             }
         }
         
         // ========== ОБРАБОТКА ФОРМ ==========
         async function handleSubmit(formData, type) {
-            await sendToGoogleSheets(formData, type);
+            await sendToEmail(formData, type);
             alert('✅ Заявка отправлена! Мы свяжемся с вами.');
             return true;
         }
@@ -1313,7 +1282,6 @@
             m.addEventListener('click', (e) => { if(e.target === m) closeModal(m.id.replace('modal-','')); });
         });
         
-        // Админ-панель кнопки
         document.getElementById('closeAdminBtn')?.addEventListener('click', closeAdminPanel);
         document.getElementById('exportDataBtn')?.addEventListener('click', exportToCSV);
         document.getElementById('clearLocalBtn')?.addEventListener('click', clearLocalData);
@@ -1339,7 +1307,6 @@
             });
         }
         
-        // Частицы
         function createParticles() {
             const container = document.getElementById('particles');
             if(!container) return;
@@ -1352,7 +1319,6 @@
         }
         createParticles();
         
-        // Курсор
         if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
             const anchor = document.querySelector('.cursor-anchor');
             const ring = document.querySelector('.cursor-ring');
@@ -1361,9 +1327,6 @@
                 setTimeout(() => { if(ring) ring.style.cssText = `left:${e.clientX-25}px;top:${e.clientY-25}px`; }, 50);
             });
         }
-        
-        // Инициализация
-        console.log('Сайт готов, URL Google Sheets:', GOOGLE_SCRIPT_URL);
     </script>
 </body>
 </html>
